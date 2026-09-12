@@ -1,0 +1,78 @@
+{
+  "tools": [
+    {
+      "id": "recall_rp_memory",
+      "name": "recall_rp_memory",
+      "description": "Search for specific past details absent from supplied context when historical accuracy matters; do not use it to validate a new user development. Put all missing facets of one event in one request, then call again only for one essential gap after reading the result.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "query"
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "One self-contained event question with distinguishing people, place, time, action, or object cues; use the supplied memory language when known."
+          },
+          "ref": {
+            "type": "string",
+            "description": "Optional exact current-turn memory ref, such as m1. Use it when the supplied memory is the scene being questioned."
+          },
+          "aspects": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "type": "string"
+            },
+            "description": "All missing details of that event as separate, self-contained questions in this single call (max 5)."
+          },
+          "intent": {
+            "type": "string",
+            "enum": [
+              "recall",
+              "relationship",
+              "promise",
+              "world_state",
+              "evidence"
+            ],
+            "description": "Optional emphasis: recall=events, relationship=relationships, promise=commitments, world_state=facts and beliefs, evidence=source wording. Other relevant evidence remains searchable."
+          }
+        }
+      }
+    },
+    {
+      "id": "follow_rp_memory",
+      "name": "follow_rp_memory",
+      "description": "Request one essential still-missing detail from a memory ref returned in this turn. Name the exact gap and do not repeat evidence already returned.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref"
+        ],
+        "properties": {
+          "intent": {
+            "type": "string",
+            "enum": [
+              "recall",
+              "relationship",
+              "promise",
+              "world_state",
+              "evidence"
+            ],
+            "description": "Optional emphasis: recall=events, relationship=relationships, promise=commitments, world_state=facts and beliefs, evidence=source wording. Other relevant evidence remains searchable."
+          },
+          "ref": {
+            "type": "string",
+            "description": "An exact memory ref supplied in this turn, such as m1."
+          },
+          "query": {
+            "type": "string",
+            "description": "Optional question about the missing detail of this memory."
+          }
+        }
+      }
+    }
+  ]
+}

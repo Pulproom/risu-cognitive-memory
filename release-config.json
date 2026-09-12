@@ -1,0 +1,11 @@
+{
+  "productVersion": "1.0.0",
+  "pluginVersion": "1.0.0",
+  "serverVersion": "1.0.0",
+  "apiRevision": 64,
+  "minimumPluginVersion": "1.0.0",
+  "minimumServerVersion": "1.0.0",
+  "releaseNotes": [
+    "Risu Cognitive Memory의 첫 정식 릴리스를 준비합니다."
+  ]
+}
